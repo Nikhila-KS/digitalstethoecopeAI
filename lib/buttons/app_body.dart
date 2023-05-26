@@ -51,6 +51,25 @@ class _HomeState extends State<Homebody> {
     setState(() {});
   }
 
+  getreclist(){
+    // Future.delayed(Duration(seconds: 2));
+    setState(() {});
+    return SingleChildScrollView(
+      child: ListView.builder(
+                    itemCount:records.length,
+                      itemBuilder:  (context,index) {
+                      return WaveBubble(
+                        path: records[1],
+                        isSender: true,
+                        index: index,
+                        appDirectory: appDirectory,
+                      );
+
+                    }
+                  ),
+    );
+  } 
+
   void _initialiseControllers() {
     recorderController = RecorderController()
       ..androidEncoder = AndroidEncoder.aac
@@ -207,17 +226,37 @@ class _HomeState extends State<Homebody> {
                 fontSize: 22,
               ),),
               SizedBox(height: 20,),
+
+              // records.lenght==0?Text("No recordings"):ListView.builder(
+              //     itemCount:records.lenght;
+              //     itemBuilder: itemBuilder),
+              //.........................................................................
               if(records.length==0) Text("No recordings"),
+              //.........................................................................
               if(isRecordingCompleted)
-                Column(
-                  children: [
-                    WaveBubble(
-                      path: path,
-                      isSender: true,
-                      appDirectory: appDirectory,
-                    ),Text("recording 1"),
-                  ],
-                ),
+                if(records.length>0) getreclist(),
+                //   ListView.builder(
+                //   itemCount:records.length,
+                //     itemBuilder:  (context,index) {
+                //     return WaveBubble(
+                //       path: records[1],
+                //       is-05_203Sender: true,
+                //       index: index,
+                //       appDirectory: appDirectory,
+                //     );
+
+                //   }
+                // ),
+
+              //   Column(
+              //     children: [
+              //       WaveBubble(
+              //         path: path,
+              //         isSender: true,
+              //         appDirectory: appDirectory,
+              //       ),Text("recording 1"),
+              //     ],
+              //   ),
               SizedBox(height: 10,),
               if(records.length==2) Column(
                 children: [
@@ -248,60 +287,62 @@ class _HomeState extends State<Homebody> {
                     ],
                   ),
                 ),
+              //
+              // if(records.length==4) SingleChildScrollView(
+              //     child: Column(
+              //       children: [
+              //         WaveBubble(
+              //           path: records[1],
+              //           isSender: true,
+              //           appDirectory: appDirectory,
+              //         ),Text("recording 2"),
+              //         SizedBox(height: 10,),
+              //         WaveBubble(
+              //           path: records[2],
+              //           isSender: true,
+              //           appDirectory: appDirectory,
+              //         ),Text("recording 3"),
+              //         SizedBox(height: 10,),
+              //         WaveBubble(
+              //           path: records[3],
+              //           isSender: true,
+              //           appDirectory: appDirectory,
+              //         ),Text("recording 4"),
+              //         SizedBox(height: 10,),
+              //       ],
+              //     ),
+              //   ),
+              // if(records.length==5) SingleChildScrollView(
+              //     child: Column(
+              //       children: [
+              //         WaveBubble(
+              //           path: records[1],
+              //           isSender: true,
+              //           appDirectory: appDirectory,
+              //         ),Text("recording 2"),
+              //         SizedBox(height: 10,),
+              //         WaveBubble(
+              //           path: records[2],
+              //           isSender: true,
+              //           appDirectory: appDirectory,
+              //         ),Text("recording 3"),
+              //         SizedBox(height: 10,),
+              //         WaveBubble(
+              //           path: records[3],
+              //           isSender: true,
+              //           appDirectory: appDirectory,
+              //         ),Text("recording 4"),
+              //         SizedBox(height: 10,),
+              //         WaveBubble(
+              //           path: records[4],
+              //           isSender: true,
+              //           appDirectory: appDirectory,
+              //         ),Text("recording 5",textAlign: TextAlign.right,),
+              //       ],
+              //     ),
+              //   ),
+              //.........................................................................
 
-              if(records.length==4) SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      WaveBubble(
-                        path: records[1],
-                        isSender: true,
-                        appDirectory: appDirectory,
-                      ),Text("recording 2"),
-                      SizedBox(height: 10,),
-                      WaveBubble(
-                        path: records[2],
-                        isSender: true,
-                        appDirectory: appDirectory,
-                      ),Text("recording 3"),
-                      SizedBox(height: 10,),
-                      WaveBubble(
-                        path: records[3],
-                        isSender: true,
-                        appDirectory: appDirectory,
-                      ),Text("recording 4"),
-                      SizedBox(height: 10,),
-                    ],
-                  ),
-                ),
-              if(records.length==5) SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      WaveBubble(
-                        path: records[1],
-                        isSender: true,
-                        appDirectory: appDirectory,
-                      ),Text("recording 2"),
-                      SizedBox(height: 10,),
-                      WaveBubble(
-                        path: records[2],
-                        isSender: true,
-                        appDirectory: appDirectory,
-                      ),Text("recording 3"),
-                      SizedBox(height: 10,),
-                      WaveBubble(
-                        path: records[3],
-                        isSender: true,
-                        appDirectory: appDirectory,
-                      ),Text("recording 4"),
-                      SizedBox(height: 10,),
-                      WaveBubble(
-                        path: records[4],
-                        isSender: true,
-                        appDirectory: appDirectory,
-                      ),Text("recording 5",textAlign: TextAlign.right,),
-                    ],
-                  ),
-                ),
 
 
               if (musicFile != null)
@@ -310,6 +351,7 @@ class _HomeState extends State<Homebody> {
                   isSender: true,
                   appDirectory: appDirectory,
                 ),
+
               // if (musicFile != null)
               //   WaveBubble(
               //     path: musicFile,
